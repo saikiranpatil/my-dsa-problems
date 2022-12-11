@@ -7,7 +7,7 @@ class Solution {
 public:
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
         // Code here 
-                int n = image.size();
+        int n = image.size();
         int m = image[0].size();
         int oldColor = image[sr][sc];
         if (oldColor == newColor)
