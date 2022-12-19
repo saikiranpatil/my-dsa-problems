@@ -7,11 +7,20 @@ public:
         
         string ans="";
         
-        for(int i=0;i<numRows;i++){
-            for(int j=i;j<n;j=j+ 2*numRows - 2){
+        for (int i=0;i<numRows;i++){
+            int j=i;
+            bool down=true;
+            while (j<n){
                 ans+=s[j];
-                if(i!=0 && i!=numRows-1 && j+2*(numRows-i-1)<n){
-                    ans+= s[j+2*(numRows-i-1)];
+                if (i==0 || i==numRows-1){
+                    j += 2*numRows-2;
+                }else{
+                    if(down){
+                        j+=2*(numRows-i-1);
+                    }else{
+                        j+=2*i;
+                    }
+                    down = !down;
                 }
             }
         }
