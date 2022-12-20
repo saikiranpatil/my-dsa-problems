@@ -1,8 +1,8 @@
 class Solution {
 public:
     int reverse(int x) {
-        int u =  (pow(2,31) - 1)/10;
-        int l = -(pow(2,31)/10);
+        int u = 2147483647 / 10;
+        int l = -2147483648 / 10;
         int ans=0;
         
         while(x){
