@@ -17,7 +17,6 @@ class Solution
         if(dp[x][y]!=-1) return dp[x][y];
         if(x==0 || y==0) return dp[x][y]=0;
         if(s1[x-1]==s2[y-1]) return dp[x][y]=1+lcs(x-1,y-1,s1,s2);
-        
         return dp[x][y]=max(lcs(x,y-1,s1,s2),lcs(x-1,y,s1,s2));
     }
 };
