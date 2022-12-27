@@ -56,17 +56,17 @@ public:
             while(sz--){
                 TreeNode* curr=q.front();
 
-                if (curr->left && curr->left->val != -1){
+                if(curr->left && curr->left->val != -1){
                     curr->left->val = -1;
                     q.push(curr->left);
                 }
 
-                if (curr->right && curr->right->val != -1){
+                if(curr->right && curr->right->val != -1){
                     curr->right->val = -1;
                     q.push(curr->right);
                 }
 
-                if (parent[curr] && parent[curr]->val != -1){
+                if(parent[curr] && parent[curr]->val != -1){
                     parent[curr]->val = -1;
                     q.push(parent[curr]);
                 }
