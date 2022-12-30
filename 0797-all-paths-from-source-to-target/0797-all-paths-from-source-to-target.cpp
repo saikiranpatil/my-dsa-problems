@@ -2,9 +2,7 @@ class Solution {
 public:
     vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
         vector<vector<int>> ans;
-        
         helper(graph, ans, {0}, 0, graph.size());
-        
         return ans;
     }
     
