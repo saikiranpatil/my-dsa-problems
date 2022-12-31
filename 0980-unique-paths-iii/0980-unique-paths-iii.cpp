@@ -4,35 +4,32 @@ const int dy[] = {0, 1, 0, -1};
 class Solution {
 public:
     bool valid(vector<vector<int>>& grid, int x, int y){
-        int m=grid.size(), n=grid[0].size();
-        return (x>=0 && x<m && y>=0 && y<n && grid[x][y]!=-1);
+        return (x>=0 && x<grid.size() && y>=0 && y<grid[0].size() && grid[x][y]!=-1);
     }
     
-    int helper(vector<vector<int>>& grid, vector<vector<bool>> visited, int x, int y, int count){
+    int helper(vector<vector<int>>& grid, int x, int y, int count){
         if(grid[x][y]==2) return count==0;
         
-        visited[x][y]=true;
+        grid[x][y]=-2;
         
         int ans=0;
         for(int i=0;i<4;i++){
             int nx=x+dx[i];
             int ny=y+dy[i];
-            if(valid(grid, nx, ny) && !visited[nx][ny]){
-                ans+=helper(grid, visited, nx, ny, count - (grid[nx][ny]==0 ? 1 : 0));
+            if(valid(grid, nx, ny) && grid[nx][ny]!=-2){
+                ans+=helper(grid, nx, ny, count - (grid[nx][ny]==0 ? 1 : 0));
             }
         }
         
-        visited[x][y]=false;
+        grid[x][y]=0;
         return ans;
     }
     
     int uniquePathsIII(vector<vector<int>>& grid) {
-        int m=grid.size(), n=grid[0].size();
-        vector<vector<bool>> visited(m,vector<bool>(n,false));
         int x, y, count=0;
         
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
+        for(int i=0;i<grid.size();i++){
+            for(int j=0;j<grid[0].size();j++){
                 if(grid[i][j]==1){
                     x=i;
                     y=j;
@@ -41,6 +38,6 @@ public:
             }
         }
         
-        return helper(grid, visited, x, y, count);
+        return helper(grid, x, y, count);
     }
 };
