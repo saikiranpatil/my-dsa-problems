@@ -16,6 +16,7 @@ public:
         if((low && root->val<=*low) || (high && root->val>=*high)) return false;
         if(root->left && root->left->val >= root->val) return false;
         if(root->right && root->right->val <= root->val) return false;
+        
         return isValidBST(root->left, low, &(root->val)) && isValidBST(root->right, &(root->val), high);
     }
 };
