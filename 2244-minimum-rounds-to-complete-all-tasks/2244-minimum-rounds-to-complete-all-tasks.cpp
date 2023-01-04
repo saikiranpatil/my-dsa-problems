@@ -4,9 +4,7 @@ public:
         int ans=0;
         unordered_map<int, int> mp;
         
-        for(int i=0;i<tasks.size();i++){
-            mp[tasks[i]]++;
-        }
+        for(int i=0;i<tasks.size();i++) mp[tasks[i]]++;
         
         for(auto it:mp){
             if(it.second==1) return -1;
