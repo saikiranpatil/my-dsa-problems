@@ -13,11 +13,11 @@ public:
             graph[edge[1]].push_back(edge[0]);
         }
         
-        helper(0, -1, graph, labels);
+        helper(0, -1, labels);
         return ans;
     }
     
-    void helper(int idx, int parent, vector<vector<int>>& graph, string& labels) {
+    void helper(int idx, int parent, string& labels) {
         char chIdx = labels[idx] - 'a';
         
         int prevCount = count[chIdx];
@@ -26,7 +26,7 @@ public:
         for(auto node: graph[idx]){
             if(node == parent) continue;
             
-            helper(node, idx, graph, labels);
+            helper(node, idx, labels);
         }
         
         ans[idx] = count[chIdx] - prevCount;
