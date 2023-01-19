@@ -1,11 +1,10 @@
 class Solution {
 public:
+    int dp[38]={0};
     int tribonacci(int n) {
-        if (n < 2) return n;
-        int a = 0, b = 1, c = 1, d = a + b + c;
-        while (n-- > 2) {
-            d = a + b + c, a = b, b = c, c = d;
-        }
-        return c;
+        if(n<=1) return n;
+        if(n==2) return 1;
+        if(dp[n]!=0) return dp[n];
+        return dp[n]=tribonacci(n-1)+tribonacci(n-2)+tribonacci(n-3);
     }
 };
