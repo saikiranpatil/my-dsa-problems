@@ -1,15 +1,9 @@
 class Solution {
 public:
-    string reverseStr(string str) {
-        int n = str.length();
-
-        for (int i = 0; i < n / 2; i++) swap(str[i], str[n - i - 1]);
-        
-        return str;
-    }
     int longestPalindromeSubseq(string s) {
         int n=s.size();
-        string rev=reverseStr(s);
+        string rev=s;
+        reverse(rev.begin(), rev.end());
         vector<vector<int>> dp(n+1,vector<int>(n+1,0));
 
         for(int i=1;i<=n;i++){
