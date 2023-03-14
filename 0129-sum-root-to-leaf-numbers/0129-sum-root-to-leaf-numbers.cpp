@@ -19,6 +19,7 @@ public:
     }
     
     void helper(TreeNode* root, int val){
+        if(root==NULL) return;
         if(root->left==NULL && root->right==NULL){
             ans+=val;
             return;
