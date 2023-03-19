@@ -106,25 +106,16 @@ class Solution{
     //Function to check whether a binary tree is balanced or not.
     bool isBalanced(Node *root)
     {
-        //  Your Code here
         return isBal(root)!=-1;
     }
     
     int isBal(Node *root){
-        if(root==NULL){
-            return 0;
-        }
+        if(root==NULL) return 0; 
         
         int lt = root->left == NULL ? 0:isBal(root->left);
         int rt = root->right == NULL ? 0:isBal(root->right);
         
-        if(abs(lt-rt)>1){
-            return -1;
-        }
-        
-        if(lt==-1 || rt==-1){
-            return -1;
-        }
+        if(abs(lt-rt)>1 || lt==-1 || rt==-1) return -1;
         
         return (max(lt,rt)+1);
         
