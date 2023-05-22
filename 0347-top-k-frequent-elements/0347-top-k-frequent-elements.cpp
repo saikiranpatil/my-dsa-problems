@@ -8,11 +8,9 @@ public:
         for(auto num: nums) count[num]++;
         for(auto it: count) tmp.push_back({it.second, it.first});
         
-        sort(tmp.begin(), tmp.end(), greater<pair<int, int>>());
+        sort(tmp.rbegin(), tmp.rend());
         
-        int idx=0;
-        
-        while(k--) ans.push_back(tmp[idx++].second);
+        for(int i=0;i<k;i++) ans.push_back(tmp[i].second);
         
         return ans;
     }
