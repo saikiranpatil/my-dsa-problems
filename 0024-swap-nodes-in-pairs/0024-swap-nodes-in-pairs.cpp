@@ -11,7 +11,7 @@
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
-        if(head==NULL) return NULL;
+        if(!head) return head;
         
         ListNode *first = head, *second=head->next;
         
