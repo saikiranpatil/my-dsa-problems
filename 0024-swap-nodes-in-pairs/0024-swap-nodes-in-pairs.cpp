@@ -13,8 +13,7 @@ public:
     ListNode* swapPairs(ListNode* head) {
         if(!head) return head;
         
-        ListNode *first = head;
-        ListNode *second=head->next;
+        ListNode *first = head, *second=head->next;
         
         while(first && second){
             int tmp=first->val;
