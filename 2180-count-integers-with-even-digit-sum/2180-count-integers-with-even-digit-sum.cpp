@@ -4,12 +4,14 @@ public:
         int ans=0;
         
         for(int i=1;i<=num;i++){
-            string s=to_string(i);
-            int curr=0;
+            int curr=i, curr_sum=0;
             
-            for(int i=0;i<s.size();i++) curr+=s[i] - '0';
+            while(curr){
+                curr_sum+=curr%10;
+                curr/=10;
+            }
             
-            if(curr%2==0) ans++;
+            if(curr_sum%2==0) ans++;
         }
         
         return ans;
