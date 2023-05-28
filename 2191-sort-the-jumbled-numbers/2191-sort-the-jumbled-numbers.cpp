@@ -24,11 +24,10 @@ bool comparefn(int a, int b)
 class Solution {
 public:    
     vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums) {
-        vector<int> ans(nums.begin(), nums.end());
         mapper = mapping;
         
-        sort(ans.begin(), ans.end(), comparefn);
+        sort(nums.begin(), nums.end(), comparefn);
         
-        return ans;
+        return nums;
     }
 };
