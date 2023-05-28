@@ -6,11 +6,7 @@ public:
         int n=nums.size();
         unordered_map<int, int> mp;
         
-        for(int i=0;i<n-1;i++){
-            if(nums[i]==key){
-                mp[nums[i+1]]++;
-            }
-        }
+        for(int i=0;i<n-1;i++) if(nums[i]==key) mp[nums[i+1]]++;
         
         for(auto it: mp){
             if(it.second>mx_count){
