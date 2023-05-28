@@ -1,7 +1,9 @@
 class Solution {
 public:
-    long long minimumTime(vector<int>& time, int totalTrips) {
-        long long low = 0, high = LLONG_MAX / time.size();
+    long long minimumTime(vector<int>& time, int totalTrips) {\
+        int n=time.size();
+        long long low = 0;
+        long long high = LLONG_MAX / n;
         
         while (low < high) {
             long long mid = low + (high - low) / 2, curr = 0;
