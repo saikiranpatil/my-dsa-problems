@@ -8,28 +8,36 @@ public:
     }
     
     bool addCar(int carType) {
-        if(carType == 1){
-            if(b==0){
-                return false;
-            }else{
-                b--;
-                return true;
-            }
+        switch(carType){
+            case 1:{
+                    if(b==0){
+                        return false;
+                    }else{
+                        b--;
+                    }
+                }
+                break;
+                
+            case 2:{
+                    if(m==0){
+                        return false;
+                    }else{
+                        m--;
+                    }
+                }
+                break;
+                
+            case 3:{
+                    if(s==0){
+                        return false;
+                    }else{
+                        s--;
+                    }
+                }
+                break;
+                
         }
-        else if(carType == 2){
-            if(m==0){
-                return false;
-            }else{
-                m--;
-                return true;
-            }
-        }
-        if(s!=0){
-            s--;
-            return true;
-        }
-        
-        return false;
+        return true;
     }
 };
 
