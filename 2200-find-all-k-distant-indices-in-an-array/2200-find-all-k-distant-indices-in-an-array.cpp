@@ -1,7 +1,9 @@
 class Solution {
 public:
     vector<int> findKDistantIndices(vector<int>& nums, int key, int k) {
-        int count=0, n=nums.size();
+        int count=0;
+        int n=nums.size();
+        
         vector<int> ans;
         
         for(int i=-k;i<n;i++){
