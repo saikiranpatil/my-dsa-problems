@@ -16,7 +16,6 @@ public:
         
         if(x1==x2){
             for(int i=2;i<n;i++){
-                
                 if(coordinates[i][0]!=x1) return false;
             }
             
