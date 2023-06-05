@@ -15,8 +15,7 @@ public:
         double c = y1 - m*x1;
         
         if(x1==x2){
-            for(int i=2;i<n;i++){
-                
+            for(int i=2;i<n;i++){                
                 if(coordinates[i][0]!=x1) return false;
             }
             
@@ -29,7 +28,7 @@ public:
             
             double equation = yn - m*xn - c;
             
-            if((x1==x2 && coordinates[i][0]!=x1) || (x1!=x2 && equation != 0)) return false;
+            if(equation != 0) return false;
         }
         
         return true;
