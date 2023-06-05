@@ -5,9 +5,10 @@ public:
         int ans= 0;
         vector<int> v;
         
-        for(int i=0;i<n;i++){
-            v.push_back(nums[i]);
-            while(i!=n-1 && nums[i]==nums[i+1]) i++;
+        v.push_back(nums[0]);
+        for (int i=1;i<nums.size(); i++){
+            if (nums[i] != nums[i - 1])
+                v.push_back(nums[i]);
         }
         
         for(int i=1;i<v.size()-1;i++){
