@@ -1,32 +1,27 @@
 class Solution {
 public:
     vector<long long> kthPalindrome(vector<int>& queries, int intLength) {
-        vector<long long> ans;
+        int n = queries.size();
+        vector<long long> ans(n, -1);
         
         int sz = (intLength - 1) / 2;
         long long base = pow(10, sz);
         
-        for(auto query: queries){
-            if(query > 9*base){
-                ans.push_back(-1);
-                continue;
+        for(int i = 0;i < n;i++){
+            if(queries[i] > 9*base) continue;
+            
+            long long curr = base + queries[i] - 1, tmp = curr;
+            
+            if(intLength%2) tmp /= 10;
+            
+            while(tmp){
+                curr = curr * 10 + tmp%10;
+                tmp /= 10;
             }
             
-            string num = to_string(query + base - 1);
-            string rev = reversestr(num);
-            
-            if(intLength%2) num.pop_back();
-            num = num + rev;
-            
-            long long curr = stol(num);
-            ans.push_back(curr);
+            ans[i] = curr;
         }
         
         return ans;
-    }
-    
-    string reversestr(string str){
-        reverse(str.begin(), str.end());
-        return str;
     }
 };
