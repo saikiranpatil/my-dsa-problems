@@ -1,21 +1,17 @@
 class Solution {
 public:
     string capitalizeTitle(string title) {
-        int prev = -2;
         int n = title.size();
+        int prev = 0;
         
-        for(int i=0;i<n;i++){
-            title[i] = toupper(title[i]);
-            
-            while(i+1 < n && title[i+1] != ' '){
-                i++;
-                title[i]=tolower(title[i]);
+        for (int i = 0; i <= title.size(); ++i) {
+            if (i == title.size() || title[i] == ' ') {
+                if (i - prev > 2) title[prev] = toupper(title[prev]);
+                prev = i + 1;
+            }else{
+                title[i] = tolower(title[i]);
             }
-            
-            if(i-prev < 4) title[prev+2] = tolower(title[prev+2]);
-            prev = i++;
         }
-        
         return title;
     }
 };
