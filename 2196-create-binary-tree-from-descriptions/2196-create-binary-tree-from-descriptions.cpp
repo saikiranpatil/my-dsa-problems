@@ -12,16 +12,16 @@
 class Solution {
 public:
     TreeNode* createBinaryTree(vector<vector<int>>& descriptions) {
-        unordered_map<int, TreeNode*> nodes;
-        unordered_map<int, bool> isChild;
+        vector<TreeNode*> nodes(999999, NULL);
+        vector<bool> isChild(999999, false);
         
         for(auto desc: descriptions){
-            if(nodes.find(desc[0]) == nodes.end()){
+            if(nodes[desc[0]] == NULL){
                 TreeNode* root = new TreeNode(desc[0]);
                 nodes[desc[0]] = root;
             }
             
-            if(nodes.find(desc[1]) == nodes.end()){
+            if(nodes[desc[1]] == NULL){
                 TreeNode* child = new TreeNode(desc[1]);
                 nodes[desc[1]] = child;
             }
@@ -32,8 +32,8 @@ public:
             else nodes[desc[0]]->right = nodes[desc[1]];
         }
         
-        for(auto node: nodes){
-            if(!isChild[node.first]) return node.second;
+        for(int i=1;i<=999999;i++){
+            if(nodes[i] && !isChild[i]) return nodes[i];
         }
         
         return NULL;
