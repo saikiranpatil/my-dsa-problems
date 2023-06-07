@@ -12,8 +12,8 @@
 class Solution {
 public:
     TreeNode* createBinaryTree(vector<vector<int>>& descriptions) {
-        vector<TreeNode*> nodes(999999, NULL);
-        vector<bool> isChild(999999, false);
+        vector<TreeNode*> nodes(100001, NULL);
+        vector<bool> isChild(100001, false);
         
         for(auto desc: descriptions){
             if(nodes[desc[0]] == NULL){
@@ -32,7 +32,7 @@ public:
             else nodes[desc[0]]->right = nodes[desc[1]];
         }
         
-        for(int i=1;i<=999999;i++){
+        for(int i=1;i<=100001;i++){
             if(nodes[i] && !isChild[i]) return nodes[i];
         }
         
