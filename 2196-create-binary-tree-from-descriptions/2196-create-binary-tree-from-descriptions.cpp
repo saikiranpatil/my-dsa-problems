@@ -32,7 +32,9 @@ public:
             else nodes[desc[0]]->right = nodes[desc[1]];
         }
         
-        for(auto node: nodes) if(!isChild[node.first]) return node.second;
+        for(auto node: nodes){
+            if(!isChild[node.first]) return node.second;
+        }
         
         return NULL;
     }
