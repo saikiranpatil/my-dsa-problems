@@ -1,33 +1,31 @@
 class Solution {
 public:
-    bool isValid(vector<int> position, int k, int m){
-        for(int i=1, prev=0, count=1;i<position.size();i++){
-            if(position[i] - position[prev] >= k){
-                count++;
-                prev=i;
-                
-                if(count == m) return true;
-            }
+    int isValid(vector<int> position, int k){
+        int i=1, prev=position[0], count=1;
+        
+        for(auto num: position){
+            if(num < prev + k) continue;
+            prev = num;
+            count++;
         }
         
-        return false;
+        return count;
     }
     
     int maxDistance(vector<int>& position, int m) {
-        int ans=0;
         sort(position.begin(), position.end());
+        int low=1, high = position.back() - position[0];
         
-        for(int low = 0, high = position[position.size()-1] - position[0];low <= high;){
-            int mid = low + (high - low) / 2;
+        while(low <= high){
+            int mid = (high + low) / 2;
             
-            if(isValid(position, mid, m)){
+            if(isValid(position, mid)>=m){
                 low = mid + 1;
-                ans=mid;
             }else{
                 high = mid - 1;
             }
         }
         
-        return ans;
+        return low - 1;
     }
 };
