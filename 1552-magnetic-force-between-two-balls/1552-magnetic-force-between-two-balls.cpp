@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int isValid(vector<int> position, int k){
+    int isValid(vector<int>& position, int k){
         int i=1, prev=position[0], count=1;
         
         for(auto num: position){
