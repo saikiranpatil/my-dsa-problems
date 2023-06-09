@@ -7,11 +7,9 @@ public:
         
         while (l <= h) {
             mid = (l + h) / 2;
-            if (c[mid] <= t) {
-                l = mid + 1;
-            } else {
-                h = mid - 1;
-            }
+            
+            if (c[mid] <= t) l = mid + 1;
+            else h = mid - 1;
         }
 
         return l == c.size() ? c[0] : c[l];
