@@ -1,11 +1,10 @@
 class SnapshotArray {
 public:
     vector<unordered_map<int, int>> snaps;
-    int snapId;
+    int snapId=0;
     
     SnapshotArray(int length) {
         snaps.resize(length);
-        snapId=0;
     }
     
     void set(int index, int val) {
@@ -13,9 +12,7 @@ public:
     }
     
     int snap() {
-        int ans=snapId;
-        snapId++;
-        return ans;
+        return snapId++;
     }
     
     int get(int index, int snap_id) {
@@ -23,11 +20,7 @@ public:
             snap_id--;
         }
         
-        if (snap_id < 0){
-            return 0;
-        }
-        
-        return snaps[index][snap_id];
+        return snap_id < 0 ? 0 : snaps[index][snap_id];
     }
 };
 
