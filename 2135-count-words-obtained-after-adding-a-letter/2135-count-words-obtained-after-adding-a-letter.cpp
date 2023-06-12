@@ -5,7 +5,9 @@ public:
     }
     
     bool isValidWord(string word, unordered_set<int>& nums){        
-        for(int i=0, target = bitConverter(word);i<32;i++){
+        int  target = bitConverter(word);
+        
+        for(int i=0;i<32;i++){
             if((target>>i) & 1){
                 int curr = target - pow(2, i);
                 
