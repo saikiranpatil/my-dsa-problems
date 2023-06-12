@@ -10,10 +10,8 @@ public:
         return ans;
     }
     
-    bool isValidWord(string word, unordered_set<int>& nums){
-        int target = bitConverter(word);
-        
-        for(int i=0;i<32;i++){
+    bool isValidWord(string word, unordered_set<int>& nums){        
+        for(int i=0, target = bitConverter(word);i<32;i++){
             if((target>>i) & 1){
                 int curr = target - pow(2, i);
                 
@@ -29,11 +27,9 @@ public:
     int wordCount(vector<string>& startWords, vector<string>& targetWords) {
         unordered_set<int> nums;
         int ans = 0;
-        int curr;
         
         for(auto word: startWords){
-            curr = bitConverter(word);
-            nums.insert(curr);
+            nums.insert(bitConverter(word));
         }
         
         for(auto word: targetWords){
