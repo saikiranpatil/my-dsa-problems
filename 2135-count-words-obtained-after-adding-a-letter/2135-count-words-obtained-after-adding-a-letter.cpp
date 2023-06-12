@@ -1,13 +1,7 @@
 class Solution {
 public:
-    int bitConverter(string& str){
-        int ans = 0;
-        
-        for(auto c: str){
-            ans += pow(2, c - 'a');
-        }
-        
-        return ans;
+    int bitConverter(string& w){
+        return accumulate(begin(w), end(w), 0, [](int mask, char ch){ return mask + (1 << (ch - 'a')); });  
     }
     
     bool isValidWord(string word, unordered_set<int>& nums){        
