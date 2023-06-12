@@ -23,11 +23,9 @@ public:
     int wordCount(vector<string>& startWords, vector<string>& targetWords) {
         unordered_set<int> nums;
         int ans = 0;
-        int curr;
         
         for(auto word: startWords){
-            curr = bitConverter(word);
-            nums.insert(curr);
+            nums.insert(bitConverter(word));
         }
         
         for(auto word: targetWords){
