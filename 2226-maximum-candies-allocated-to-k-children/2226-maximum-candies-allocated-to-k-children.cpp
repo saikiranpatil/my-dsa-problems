@@ -2,7 +2,11 @@ class Solution {
 public:
     int maximumCandies(vector<int>& candies, long long k) {    
         long long curr;
-        for(int low=1, high=INT_MAX, mid;low<=high;){
+        int low=1;
+        int high=INT_MAX;
+        int mid;
+        
+        while(low<=high){
             curr = 0;
             mid = low + (high - low) / 2;
             
