@@ -1,7 +1,8 @@
 class Solution {
 public:
     int maximumCandies(vector<int>& candies, long long k) {    
-        for(long long low=1, high=INT_MAX, mid, curr;low<=high;){
+        long long curr;
+        for(int low=1, high=INT_MAX, mid;low<=high;){
             curr = 0;
             mid = low + (high - low) / 2;
             
