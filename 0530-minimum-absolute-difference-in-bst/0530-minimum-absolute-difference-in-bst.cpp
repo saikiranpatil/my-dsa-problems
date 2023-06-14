@@ -11,8 +11,8 @@
  */
 class Solution {
 public:
-    vector<int> nums;
     int ans = INT_MAX;
+    vector<int> nums;
     void helper(TreeNode* root){
         if(!root){
             return;
