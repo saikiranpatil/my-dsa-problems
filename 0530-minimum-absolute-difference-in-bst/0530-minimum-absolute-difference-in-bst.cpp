@@ -13,10 +13,9 @@ class Solution {
 public:
     vector<int> nums;
     int ans = INT_MAX;
+    
     void helper(TreeNode* root){
-        if(!root){
-            return;
-        }
+        if(!root) return;
         
         helper(root->left);
         nums.push_back(root->val);
