@@ -1,16 +1,25 @@
 class Solution {
 public:
     int maximumCandies(vector<int>& candies, long long k) {    
-        int l = 0, r = 10000000;
+        long long curr;
+        int low=1;
+        int high=INT_MAX;
+        int mid;
         
-        while(l < r) {
-            long long m = (l + r + 1) / 2, cnt = 0;
-            for (int i = 0; i < candies.size() && cnt < k; ++i) cnt += candies[i] / m;
-
-            if (cnt >= k) l = m;
-            else r = m - 1;
+        while(low<=high){
+            curr = 0;
+            mid = low + (high - low) / 2;
+            
+            for(auto candy: candies){
+                curr += candy/mid;
+            }
+            
+            if(curr >= k) low = mid+1;
+            else high = mid-1;
+            
+            if(low>high) return low-1;
         }
         
-        return l;
+        return 1;
     }
 };
