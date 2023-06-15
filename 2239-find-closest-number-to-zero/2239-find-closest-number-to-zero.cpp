@@ -1,16 +1,8 @@
 class Solution {
 public:
     int findClosestNumber(vector<int>& nums) {
-        int ans=INT_MAX;
-        
-        for(auto num:nums){
-            if(abs(ans) == abs(num)){
-                ans = max(ans, num);
-            }else if(abs(ans) > abs(num)){
-                ans = num;
-            }
-        }
-        
-        return ans;
+        return *min_element(begin(nums), end(nums), [](int a, int b) {
+            return abs(a) < abs(b) || (abs(a) == abs(b) && a > b);
+        });
     }
 };
