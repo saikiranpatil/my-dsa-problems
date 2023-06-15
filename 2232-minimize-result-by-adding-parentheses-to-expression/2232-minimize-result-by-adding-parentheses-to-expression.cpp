@@ -7,16 +7,11 @@ public:
     
     string minimizeResult(string exp) {
         int n = exp.size(), plus_idx = exp.find('+'), mn = INT_MAX, prod;
-        string ans, curr, lf, ls, rf, rs;
+        string ans, curr;
         
         for(int i=0;i<plus_idx;i++){
-            for(int j=plus_idx+1;j<n;j++){
-                lf=exp.substr(0,i);
-                ls=exp.substr(i, plus_idx-i);
-                rf=exp.substr(plus_idx+1,j-plus_idx);
-                rs=exp.substr(j+1, n-j-1);
-                
-                prod = sti(lf) * (sti(ls) + sti(rf)) * sti(rs);
+            for(int j=plus_idx+1;j<n;j++){                
+                prod = sti(exp.substr(0,i)) * (sti(exp.substr(i, plus_idx-i)) + sti(exp.substr(plus_idx+1,j-plus_idx))) * sti(exp.substr(j+1, n-j-1));
                 
                 if(prod<mn){
                     mn=prod;
