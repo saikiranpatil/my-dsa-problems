@@ -8,8 +8,9 @@ public:
         
         while(k--){
             curr = pq.top();
+            curr++;
             pq.pop();
-            pq.push(curr+1);
+            pq.push(curr);
         }
         
         while(!pq.empty()){
