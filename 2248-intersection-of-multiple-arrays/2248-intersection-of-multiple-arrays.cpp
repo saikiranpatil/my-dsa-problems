@@ -1,16 +1,15 @@
 class Solution {
 public:
-    int count[1001] = {0};
     vector<int> intersection(vector<vector<int>>& nums) {
-        vector<int> ans;
+        vector<int> ans, count(1001);
         
-        for(auto rows: nums){
-            for(auto num: rows){
-                count[num]++;
+        for(int i=0; i<nums.size(); i++){
+            for(int j=0; j<nums[i].size(); j++){
+                count[nums[i][j]]++;
             }
         }
         
-        for(int i=1;i<1001;i++){
+        for(int i=0; i<count.size(); i++){
             if(count[i]==nums.size()){
                 ans.push_back(i);
             }
