@@ -1,23 +1,23 @@
 class Solution {
 public:    
     string digitSum(string s, int k) {
-        string ans = s;
-        string tmp;
+        int n = s.size();
         
-        while(ans.size()>k){
-            tmp="";
-            
-            for(int i=0, curr=0;i<ans.size();i++){
-                curr += ans[i] - '0';
-                if((i+1)%k==0 || i==ans.size()-1){
-                    tmp += to_string(curr);
-                    curr = 0;
-                }
-            }
-            
-            ans = tmp;
+        if(n<=k){
+            return s;
         }
         
-        return ans;
+        string ans = "";
+            
+        for(int i=0, curr=0;i<n;i++){
+            curr += s[i] - '0';
+            if((i+1)%k==0 || i==n-1){
+                ans += to_string(curr);
+                curr = 0;
+            }
+        }
+
+        
+        return digitSum(ans, k);
     }
 };
