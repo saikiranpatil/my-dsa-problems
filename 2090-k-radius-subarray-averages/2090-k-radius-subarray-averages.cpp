@@ -1,15 +1,18 @@
 class Solution {
 public:
     vector<int> getAverages(vector<int>& nums, int k) {
-        long long n=nums.size(), curr=0;
-        vector<int> ans(n,-1);
+        int n = nums.size();
+        vector<int> ans(n, -1);
+        long long sum = 0;
         
-        for(int i=0;i<=2*k && i<n;i++) curr+=nums[i];
+        for(int i=0;i<n && i<2*k + 1;i++){
+            sum += nums[i];
+        }
         
-        for(int i=k;i<n-k;i++){
-            ans[i]=curr/(2*k + 1);
-            if(i>=k) curr-=nums[i-k];
-            if(i+k+1<n) curr+=nums[i+k+1];
+        for(int i=0;i<n-2*k;i++){
+            ans[i + k] = sum / (2*k + 1);
+            sum -= nums[i];
+            if(i + 2*k + 1 < n) sum += nums[i + 2*k + 1];
         }
         
         return ans;
