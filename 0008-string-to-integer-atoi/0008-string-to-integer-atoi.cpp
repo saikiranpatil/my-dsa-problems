@@ -1,28 +1,36 @@
 class Solution {
 public:
     int myAtoi(string s) {
-        long long ans=0, mx=pow(2,31);
-        int idx=0, n=s.size();
-        bool isNeg = false;
-        while(idx<n && s[idx]==' ') idx++;
-        if(s[idx]=='-' || s[idx]=='+'){
-            if(s[idx]=='-'){
-                isNeg=true;
-            }
-            idx++;
+        int i = 0;
+        int x = 0;
+        int sign = 1;
+
+        while (s[i] == ' ') {
+            ++i;
         }
-        while(idx<n && s[idx]>='0' && s[idx]<='9'){
-            if(ans>pow(2,31)){
-                break;
-            }
-            ans*=10;
-            ans+=s[idx]-'0';
-            idx++;
+
+        if (s[i] != '+' && s[i] != '-' && !isdigit(s[i])) {
+            return 0;
         }
-        if(isNeg){
-            ans*=-1;
-            return max(-1*mx,ans);
+
+        if (s[i] == '-') {
+            sign = -1;
+            ++i;
+        } else if (s[i] == '+') {
+            ++i;
         }
-        return min(ans, mx-1);
+
+        while (i != s.size() && isdigit(s[i])) {
+            int y = sign * (s[i++] - '0');
+            if (sign == 1 && x > (INT_MAX - y) / 10.0) {
+                return INT_MAX;
+            } else if (sign == -1 && x < (INT_MIN - y) / 10.0) {
+                return INT_MIN;
+            } 
+
+            x = x*10 + y;
+        }
+
+        return x;
     }
 };
