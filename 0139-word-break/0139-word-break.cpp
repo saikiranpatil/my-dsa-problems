@@ -1,24 +1,31 @@
 class Solution {
-public:
-    bool helper(vector<int>& dp, string s, unordered_set<string> words, int n, int idx){
-        if(dp[idx] != -1){
-            return dp[idx];
+ public:
+  bool wordBreak(string s, vector<string>& wordDict) {
+    const int n = s.length();
+    const int maxLength = getMaxLength(wordDict);
+    const unordered_set<string> wordSet{begin(wordDict), end(wordDict)};
+    vector<int> dp(n + 1);
+    dp[0] = true;
+
+    for (int i = 1; i <= n; ++i)
+      for (int j = i - 1; j >= 0; --j) {
+        if (i - j > maxLength)
+          break;
+        if (dp[j] && wordSet.count(s.substr(j, i - j))) {
+          dp[i] = true;
+          break;
         }
-        
-        for(int i=idx;i<n;i++){
-            if(words.find(s.substr(idx, i-idx+1)) != words.end() && helper(dp, s, words, n, i+1)){
-                return dp[idx] = true;
-            }
-        }
-        
-        return dp[idx] = false;
-    }
-    
-    bool wordBreak(string s, vector<string>& wordDict) {
-        int n = s.size();
-        unordered_set<string> words(wordDict.begin(), wordDict.end());
-        vector<int> dp(n+1, -1);
-        dp[n]=1;
-        return helper(dp, s, words, n, 0);
-    }
+      }
+
+    return dp[n];
+  }
+
+ private:
+  int getMaxLength(const vector<string>& wordDict) {
+    return max_element(begin(wordDict), end(wordDict),
+                       [](const auto& a, const auto& b) {
+                         return a.length() < b.length();
+                       })
+        ->length();
+  }
 };
