@@ -1,15 +1,13 @@
 class Solution {
 public:
     int maximumNumberOfStringPairs(vector<string>& words) {
-        int ans = 0;
-        unordered_set<string> st;
-        for(auto word: words){
-            string rev = word;
-            reverse(rev.begin(), rev.end());
-            if(st.find(rev)!=st.end()){
-                ans++;
+        int ans=0, n=words.size();
+        for(int i=0; i<n; i++){
+            for(int j=i+1; j<n; j++){
+                if(words[i][0]==words[j][1] && words[i][1]==words[j][0]){
+                    ans++;
+                }
             }
-            st.insert(word);
         }
         return ans;
     }
