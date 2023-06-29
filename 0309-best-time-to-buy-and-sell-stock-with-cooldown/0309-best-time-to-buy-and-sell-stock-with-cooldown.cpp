@@ -1,9 +1,8 @@
 class Solution {
 public:
     int dp[5001][2];
-    int n;
     int helper(vector<int>& prices, int idx, int isBuy){
-        if(idx>=n){
+        if(idx>=prices.size()){
             return 0;
         }
         if(dp[idx][isBuy]!=-1){
@@ -16,7 +15,6 @@ public:
     }
     int maxProfit(vector<int>& prices) {
         memset(dp, -1, sizeof(dp));
-        n=prices.size();
         return helper(prices, 0, 1);
     }
 };
