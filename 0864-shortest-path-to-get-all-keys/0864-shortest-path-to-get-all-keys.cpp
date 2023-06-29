@@ -1,65 +1,57 @@
+int dist[31][31][64];
+
 class Solution {
 public:
-    int shortestPathAllKeys(vector<string>& grid) {
-        int m=grid.size();
-        int n=grid[0].size();
-        int bit_start=0;
-        
-        unordered_map<char,int>key_bit;
-
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if(islower(grid[i][j])){
-                    key_bit[grid[i][j]]=bit_start++;
+    struct Node {
+        int x, y, s;
+    };
+    
+    int shortestPathAllKeys(vector<string>& g) {
+        memset(dist, 0x3f, sizeof dist);
+        int n = g.size(), m = g[0].size(), S = 0;
+        queue<Node> q;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (g[i][j] == '@') {
+                    dist[i][j][0] = 0;
+                    q.push({i, j, 0});
+                } else if (g[i][j] >= 'a' && g[i][j] <= 'z') {
+                    S++;
                 }
             }
         }
-
-        int mask_size = (1<<bit_start);
-        int mask_end = mask_size - 1;
-
-        vector<vector<vector<bool>>>memo(m,vector<vector<bool>>(n,vector<bool>(mask_size,false)));
-
-        vector<int>start;
-
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if(grid[i][j]=='@'){
-                    start={i,j,0} ;
+        int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
+        while (q.size()) {
+            auto t = q.front();
+            q.pop();
+            int d = dist[t.x][t.y][t.s];
+            for (int i = 0; i < 4; i++) {
+                int x = t.x + dx[i], y = t.y + dy[i];
+                if (x < 0 || x >= n || y < 0 || y >= m || g[x][y] == '#') continue;
+                char c = g[x][y];
+                if (c >= 'a' && c <= 'z') {
+                    int s = t.s | 1 << c - 'a';
+                    if (dist[x][y][s] > d + 1) {
+                        dist[x][y][s] = d + 1;
+                        if (s == (1 << S) - 1) return d + 1;
+                        q.push({x, y, s});
+                    } 
+                } else if (c >= 'A' && c <= 'Z') {
+                    int s = t.s;
+                    if (s & (1 << c - 'A')) {
+                        if (dist[x][y][s] > d + 1) {
+                            dist[x][y][s] = d + 1;
+                            q.push({x, y, s});
+                        }
+                    } 
+                } else {
+                    int s = t.s;
+                    if (dist[x][y][s] > d + 1) {
+                        dist[x][y][s] = d + 1;
+                        q.push({x, y, s});
+                    }
                 }
             }
-        }
-
-        queue<vector<int>>q;
-        q.push(start);
-        int step=0;
-
-        while(!q.empty()){
-            int sz=q.size();
-            while(sz--){
-                int row= q.front()[0];
-                int col=q.front()[1];
-                int mask=q.front()[2];
-                q.pop();
-
-                if(row<0 || row>=m || col<0 || col>=n || grid[row][col]=='#' || isupper(grid[row][col]) && (mask & (1 << key_bit[tolower(grid[row][col])]))==0) continue;
-
-                if(islower(grid[row][col])){
-                    mask |= (1<<key_bit[grid[row][col]]);
-                }
-
-                if(mask==mask_end) return step;
-
-                if(memo[row][col][mask]) continue;
-
-                memo[row][col][mask]=true;
-
-                q.push({row+1,col,mask});
-                q.push({row-1,col,mask});
-                q.push({row,col+1,mask});
-                q.push({row,col-1,mask});
-            }
-            step++;
         }
         return -1;
     }
