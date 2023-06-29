@@ -1,26 +1,35 @@
 class Solution {
 public:
-    void solve(vector<int> &candidates, int target, vector<vector<int>> &result, vector<int> &ans, int idx, int n){
-        if(target == 0){
-            result.push_back(ans);
-            return;
+    void check(int sum,int i,int n,vector<int>& c,int k,vector<vector<int>>&ans,vector<int>&v)
+    {
+        if(sum>k)
+        {
+            return ;
         }
-        for(int i=idx;i<n;i++){
-            if(candidates[i] > target){
-                break;
+        if(i==n)
+        {
+            if(sum==k)
+            {
+                ans.push_back(v);
             }
-            ans.push_back(candidates[i]);
-            solve(candidates, target - candidates[i], result, ans, i, n);
-            ans.pop_back();
+            return ;
+            
         }
+      if(c[i]<=k)
+      {
+          v.push_back(c[i]);
+          check(sum+c[i],i,n,c,k,ans,v);
+          v.pop_back();
+      }
+       check(sum,i+1,n,c,k,ans,v);
     }
-
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        vector<vector<int>> result;
-        vector<int> ans;
-        int n = candidates.size();
-        sort(candidates.begin(), candidates.end());
-        solve(candidates, target, result, ans, 0, n);
-        return result;
+        set<vector<int>>s;
+        int n=candidates.size();
+        vector<vector<int>>ans;
+        vector<int>v;
+        check(0,0,n,candidates,target,ans,v);
+        return ans;
+        
     }
 };
