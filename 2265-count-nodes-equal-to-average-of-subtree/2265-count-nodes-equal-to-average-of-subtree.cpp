@@ -11,21 +11,22 @@
  */
 class Solution {
 public:
-    int count = 0;
-    pair<int, int> helper(TreeNode* root){
-        if(!root) return {0, 0};
-        
-        auto left = helper(root->left);
-        auto right = helper(root->right);
-        
-        pair<int, int> ans = {left.first + right.first + root->val, left.second + right.second + 1};
-        
-        if(ans.first / ans.second == root->val) count++;
-        
-        return ans;
+    int ans=0;
+    pair<int,int> solve(TreeNode* root){
+        if(root==NULL) return {0,0};
+        auto left=solve(root->left);
+        int l_sum=left.first;
+        int l_cnt=left.second;
+        auto right=solve(root->right);
+        int r_sum=right.first;
+        int r_cnt=right.second;
+        int sum=root->val+l_sum+r_sum;
+        int cnt=l_cnt+r_cnt+1;
+        if(root->val==sum/cnt)ans++;
+        return {sum,cnt};
     }
     int averageOfSubtree(TreeNode* root) {
-        helper(root);
-        return count;
+        solve(root);
+        return ans;
     }
 };
