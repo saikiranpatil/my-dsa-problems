@@ -3,10 +3,7 @@ public:
     int ans = INT_MAX;
     void helper(vector<int>& nums, vector<int>& cookies, int idx){
         if(idx<0){
-            int mx = INT_MIN;
-            for(int i=0;i<nums.size();i++){
-                mx = max(mx, nums[i]);
-            }
+            int mx = *max_element(begin(nums), end(nums));
             ans = min(ans, mx);
             return;
         }
