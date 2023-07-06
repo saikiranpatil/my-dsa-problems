@@ -1,6 +1,9 @@
 class Solution {
 public:
     int minSubArrayLen(int target, vector<int>& nums) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        
         int sum = accumulate(nums.begin(), nums.end(), 0), n = nums.size();
         if(target > sum) return 0;
         if(target == sum) return n;
