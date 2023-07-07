@@ -1,49 +1,21 @@
 class Solution {
 public:
-    int maxConsecutiveAnswers(string answerKey, int k) {
-        int n = answerKey.size();
-        int maxConsecutive = 0;
-        int maxCount = 0;
-        int left = 0;
-        int changeCount = 0;
-
-        for (int right = 0; right < n; right++) {
-            if (answerKey[right] == 'F') {
-                changeCount++;
+    int maxConsecutiveAnswers(string anskey, int k) {
+        std::ios_base::sync_with_stdio(false);
+        std::cout.tie(nullptr);
+        std::cin.tie(nullptr);
+        int i=0,j=0,n = anskey.length(),ctt=0,ctf=0,ans=0;
+        while(j<n){
+            if(anskey[j]=='T') ctt++;
+            else ctf++;
+            while(min(ctf,ctt)>k){
+                if(anskey[i]=='T') ctt--;
+                else ctf--;
+                i++;
             }
-
-            while (changeCount > k) {
-                if (answerKey[left] == 'F') {
-                    changeCount--;
-                }
-                left++;
-            }
-
-            maxCount = max(maxCount, right - left + 1);
+            ans =max(ans , j-i+1);
+            j++;
         }
-
-        maxConsecutive = max(maxConsecutive, maxCount);
-        maxCount = 0;
-        left = 0;
-        changeCount = 0;
-
-        for (int right = 0; right < n; right++) {
-            if (answerKey[right] == 'T') {
-                changeCount++;
-            }
-
-            while (changeCount > k) {
-                if (answerKey[left] == 'T') {
-                    changeCount--;
-                }
-                left++;
-            }
-
-            maxCount = max(maxCount, right - left + 1);
-        }
-
-        maxConsecutive = max(maxConsecutive, maxCount);
-
-        return maxConsecutive;
+        return ans ;
     }
 };
