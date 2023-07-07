@@ -2,35 +2,48 @@ class Solution {
 public:
     int maxConsecutiveAnswers(string answerKey, int k) {
         int n = answerKey.size();
-        vector<int> prefixSum(n + 1, 0);
         int maxConsecutive = 0;
-        
-        for (int i = 1; i <= n; i++) {
-            prefixSum[i] = prefixSum[i - 1] + (answerKey[i - 1] == 'F');
-        }
-        
-        auto isValidWindow = [&](int windowSize) {
-            for (int i = windowSize; i <= n; i++) {
-                int changes = prefixSum[i] - prefixSum[i - windowSize];
-                if (changes <= k || windowSize - changes <= k) {
-                    return true;
+        int maxCount = 0;
+        int left = 0;
+        int changeCount = 0;
+
+        for (int right = 0; right < n; right++) {
+            if (answerKey[right] == 'F') {
+                changeCount++;
+            }
+
+            while (changeCount > k) {
+                if (answerKey[left] == 'F') {
+                    changeCount--;
                 }
+                left++;
             }
-            return false;
-        };
-        
-        int left = 0, right = n;
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            
-            if (isValidWindow(mid)) {
-                maxConsecutive = mid;
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
+
+            maxCount = max(maxCount, right - left + 1);
         }
-        
+
+        maxConsecutive = max(maxConsecutive, maxCount);
+        maxCount = 0;
+        left = 0;
+        changeCount = 0;
+
+        for (int right = 0; right < n; right++) {
+            if (answerKey[right] == 'T') {
+                changeCount++;
+            }
+
+            while (changeCount > k) {
+                if (answerKey[left] == 'T') {
+                    changeCount--;
+                }
+                left++;
+            }
+
+            maxCount = max(maxCount, right - left + 1);
+        }
+
+        maxConsecutive = max(maxConsecutive, maxCount);
+
         return maxConsecutive;
     }
 };
