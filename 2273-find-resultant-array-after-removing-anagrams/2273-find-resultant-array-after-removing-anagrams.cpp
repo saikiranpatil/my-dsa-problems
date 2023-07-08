@@ -1,6 +1,9 @@
 class Solution {
 public:
     vector<string> removeAnagrams(vector<string>& words) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        
         auto sort_str = [](string str){
             sort(begin(str), end(str));
             return str;
