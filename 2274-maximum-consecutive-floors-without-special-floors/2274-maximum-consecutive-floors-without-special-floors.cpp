@@ -1,19 +1,12 @@
 class Solution {
 public:
-    int maxConsecutive(int bottom, int top, std::vector<int>& special) {
-        sort(special.begin(), special.end());
-        int prev=bottom-1;
-        int ans=0;
-
-        for (int i=0;i<special.size();i++){
-            int curr=special[i]-prev-1;
-            ans=max(ans, curr);
-            prev=special[i];
+    int maxConsecutive(int bottom, int top, vector<int>& special) {
+        special.insert(begin(special), {top + 1, bottom - 1});
+        sort(begin(special), end(special));
+        int ans = 0, n = special.size();
+        for(int i=1;i<n;i++){
+            ans = max(ans, special[i] - special[i-1] - 1);
         }
-
-        int last=top-prev;
-        ans=max(ans, last);
-
         return ans;
     }
 };
