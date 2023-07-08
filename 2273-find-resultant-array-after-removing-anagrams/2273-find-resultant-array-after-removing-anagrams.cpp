@@ -6,13 +6,12 @@ public:
         
         vector<string> ans;
         string prev = "";
-        for (auto word : words)
-        {
-            string temp = word;
+        int n = words.size();
+        for (int i=0;i<n;i++){
+            string temp = words[i];
             sort(temp.begin(), temp.end());
-            if (temp != prev)
-            {
-                ans.push_back(word);
+            if (temp != prev){
+                ans.push_back(words[i]);
             }
             prev = temp;
         }
