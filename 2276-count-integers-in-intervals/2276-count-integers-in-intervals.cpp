@@ -1,31 +1,41 @@
-class CountIntervals {
-public:
-    map<int, int> m;
-    int cnt = 0;
-    
-    CountIntervals() {}
-    
-    void add(int left, int right) {
-        auto it = m.upper_bound(left);
-        
-        if (it != begin(m) && prev(it)->second >= left) it = prev(it);
-        
-        for (; it != end(m) && it->first <= right; m.erase(it++)) {
-            left = min(left, it->first);
-            right = max(right, it->second);
-            cnt -= it->second - it->first + 1;
-        }
-        
-        cnt += right - left + 1;
-        m[left] = right;
-    }
-    
-    int count() {return cnt;}
-};
+const static auto initialize = [] { 
+    std::ios::sync_with_stdio(false); 
+    std::cin.tie(nullptr); 
+    std::cout.tie(nullptr); 
+    return nullptr; 
+}();
 
-/**
- * Your CountIntervals object will be instantiated and called as such:
- * CountIntervals* obj = new CountIntervals();
- * obj->add(left,right);
- * int param_2 = obj->count();
- */
+class CountIntervals
+{
+	std::vector<std::pair<int, int>> intervals;
+	int total = 0;
+public:
+	void add(int left, int right)
+	{
+		++right;
+
+		auto iter = std::lower_bound(std::begin(intervals), std::end(intervals), left,[](auto const& pair, auto x) { return pair.second < x; });
+        
+		if (iter == std::end(intervals) || right < iter->first){
+			intervals.emplace(iter, left, right);
+			total += right - left;
+		}else{
+			auto jter = iter;
+			for (; jter != std::end(intervals); ++jter)
+			{
+				if (jter->first > right) { break; }
+
+				iter->second = jter->second;
+				total -= jter->second - jter->first;
+			}
+
+			intervals.erase(std::next(iter), jter);
+
+			iter->first = std::min(iter->first, left);
+			iter->second = std::max(iter->second, right);
+			total += iter->second - iter->first;
+		}
+	}
+
+	int count(){return total;}
+};
