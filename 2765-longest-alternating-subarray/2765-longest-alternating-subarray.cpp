@@ -1,14 +1,12 @@
 class Solution {
 public:
     int alternatingSubarray(vector<int>& nums) {
-        int n = nums.size(), ans = 1;
-        for(int i=0;i+1<n;i++){
-            int j=i+1;
-            while(j<n && nums[j] - nums[j-1] == pow(-1, j-i+1)){
-                j++;
-            }
-            ans = max(ans, j-i);
+        int j = 0, res = 0;
+        for (int i = 1; i < nums.size(); ++i) {
+            if (nums[i] != nums[j] + (i - j) % 2)
+                j = i - (nums[i - 1]  == nums[i] - 1);
+            res = max(res, i - j + 1);
         }
-        return ans == 1 ? -1 : ans;
+        return res == 1 ? -1 : res;
     }
 };
