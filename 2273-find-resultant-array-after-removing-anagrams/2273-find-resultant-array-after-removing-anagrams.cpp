@@ -4,7 +4,7 @@ public:
         ios_base::sync_with_stdio(false);
         cin.tie(NULL);
         
-       vector<string> ans;
+        vector<string> ans;
         string prev = "";
         for (auto word : words)
         {
